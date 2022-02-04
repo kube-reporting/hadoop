@@ -129,11 +129,6 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
       <scope>compile</scope>
