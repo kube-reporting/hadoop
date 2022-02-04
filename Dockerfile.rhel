@@ -58,7 +58,7 @@ RUN rm -rf ${HADOOP_HOME}/share/doc \
     && find ${HADOOP_HOME}/share/hadoop -name *test*.jar | xargs rm -rf
 
 # remove JMSAppender class from built jars
-RUN find share/ -name '*.jar' -type f -print0 | xargs -0 grep JMSAppender.class | awk '{print $3}' | xargs -L 1 -I {} /bin/bash -c 'zip -q -d '{}' org/apache/log4j/net/JMSAppender.class'
+#RUN find share/ -name '*.jar' -type f -print0 | xargs -0 grep JMSAppender.class | awk '{print $3}' | xargs -L 1 -I {} /bin/bash -c 'zip -q -d '{}' org/apache/log4j/net/JMSAppender.class'
 
 RUN ln -s $HADOOP_HOME/etc/hadoop $HADOOP_CONF_DIR
 RUN mkdir -p $HADOOP_LOG_DIR
