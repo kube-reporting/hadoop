@@ -1,0 +1,13 @@
+- nvr: org.apache.hadoop-hadoop-main-3.1.1.redhat_00002-1
+  archives:
+  - filename: hadoop-dist-3.1.1.redhat-00002-bin.tar.gz
+    group_id: org.apache.hadoop
+- nvr: io.prometheus.jmx-parent-0.3.1.redhat_00006-1
+  archives:
+  - filename: jmx_prometheus_javaagent-0.3.1.redhat-00006.jar
+    group_id: io.prometheus.jmx
+- nvr: com.google.cloud.bigdataoss-bigdataoss-parent-1.9.17.redhat_00002-1
+  archives:
+  - filename: gcs-connector-1.9.17.hadoop3-redhat-00001-shaded.jar
+    group_id: com.google.cloud.bigdataoss
+

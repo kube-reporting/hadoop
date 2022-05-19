@@ -43,13 +43,14 @@ if [[ "$1" == "true" ]]; then
 else
   echo "ART build is running"
   # Otherwise this is a production brew build by ART
+  MAVEN_REPO_URL=${MAVEN_REPO_URL:-file:///build/artifacts}
   yum -y install curl \
     && yum clean all \
     && rm -rf /var/cache/yum
   export RH_HADOOP_PATCH_VERSION=00002
   export HADOOP_VERSION=3.1.1
 
-  export HADOOP_RELEASE_URL=http://download.eng.bos.redhat.com/brewroot/packages/org.apache.hadoop-hadoop-main/${HADOOP_VERSION}.redhat_${RH_HADOOP_PATCH_VERSION}/1/maven/org/apache/hadoop/hadoop-dist/${HADOOP_VERSION}.redhat-${RH_HADOOP_PATCH_VERSION}/hadoop-dist-${HADOOP_VERSION}.redhat-${RH_HADOOP_PATCH_VERSION}-bin.tar.gz
+  export HADOOP_RELEASE_URL=$MAVEN_REPO_URL/org/apache/hadoop/hadoop-dist/${HADOOP_VERSION}.redhat-${RH_HADOOP_PATCH_VERSION}/hadoop-dist-${HADOOP_VERSION}.redhat-${RH_HADOOP_PATCH_VERSION}-bin.tar.gz
   export HADOOP_OUT=/build/hadoop-dist/target/hadoop-$HADOOP_VERSION
 
   curl -fSLs \
@@ -65,8 +66,7 @@ else
   export RH_PROMETHEUS_JMX_EXPORTER_PATCH_VERSION=00006
   export RH_PROMETHEUS_JMX_EXPORTER_VERSION=${PROMETHEUS_JMX_EXPORTER_VERSION}.redhat-${RH_PROMETHEUS_JMX_EXPORTER_PATCH_VERSION}
   export RH_PROMETHEUS_JMX_EXPORTER_BREW_DIR=${PROMETHEUS_JMX_EXPORTER_VERSION}.redhat_${RH_PROMETHEUS_JMX_EXPORTER_PATCH_VERSION}
-  export PROMETHEUS_JMX_EXPORTER_URL=http://download.eng.bos.redhat.com/brewroot/packages/io.prometheus.jmx-parent/${RH_PROMETHEUS_JMX_EXPORTER_BREW_DIR}/1/maven/io/prometheus/jmx/jmx_prometheus_javaagent/${RH_PROMETHEUS_JMX_EXPORTER_VERSION}/jmx_prometheus_javaagent-${RH_PROMETHEUS_JMX_EXPORTER_VERSION}.jar
-
+  export PROMETHEUS_JMX_EXPORTER_URL=$MAVEN_REPO_URL/io/prometheus/jmx/jmx_prometheus_javaagent/${RH_PROMETHEUS_JMX_EXPORTER_VERSION}/jmx_prometheus_javaagent-${RH_PROMETHEUS_JMX_EXPORTER_VERSION}.jar
   set -x; curl -fSLs \
       $PROMETHEUS_JMX_EXPORTER_URL \
       -o $PROMETHEUS_JMX_EXPORTER_OUT
@@ -77,7 +77,7 @@ else
   export RH_GCS_CONNECTOR_PATCH_VERSION=00001
   export RH_GCS_CONNECTOR_VERSION=${GOOGLE_BIGDATA_OSS_VERSION}.hadoop3-redhat-${RH_GCS_CONNECTOR_PATCH_VERSION}
 
-  export GCS_CONNECTOR_URL=http://download.eng.bos.redhat.com/brewroot/packages/com.google.cloud.bigdataoss-bigdataoss-parent/${RH_GOOGLE_BIGDATA_OSS_BREW_DIR}/1/maven/com/google/cloud/bigdataoss/gcs-connector/${RH_GCS_CONNECTOR_VERSION}/gcs-connector-${RH_GCS_CONNECTOR_VERSION}-shaded.jar
+  export GCS_CONNECTOR_URL=$MAVEN_REPO_URL/com/google/cloud/bigdataoss/gcs-connector/${RH_GCS_CONNECTOR_VERSION}/gcs-connector-${RH_GCS_CONNECTOR_VERSION}-shaded.jar
 
   set -x; curl -fSLs \
       $GCS_CONNECTOR_URL \
